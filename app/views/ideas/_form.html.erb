@@ -1,0 +1,14 @@
+<%= form_with(model: @idea, url: ideas_path ) do |form| %>
+    <div>
+        <%= form.label :title %>
+        <br>
+        <%= form.text_field :title, class:"form-control"%>
+    </div>
+    <div>
+        <%= form.label :description %>
+        <br>
+        <%= form.text_area :description, cols: 50, rows: 5,class:"form-control" %>
+    </div>
+    <br>
+    <%= form.submit  "Submit", class:"btn btn-primary" %>
+<% end %>

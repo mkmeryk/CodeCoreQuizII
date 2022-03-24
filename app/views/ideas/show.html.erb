@@ -1,0 +1,91 @@
+
+<div style=" margin-top: 1%;margin-bottom: 1%;margin-left: 1%;margin-right: 1%;">
+    <div>
+        <h2 ><%= @idea.title %></h2>
+        <p><%= @idea.description %></p>    
+    </div>
+    <div>
+        <div>
+            <label>Created by: <%= @idea.user.full_name%> </label>
+            <small>Created  <%= time_ago_in_words(@idea.created_at) %> ago</label></small>
+        </div>
+        <div>
+            <small>Likes <%= @idea.likes.count %> </small>
+        </div>    
+    </div>
+
+    <div>
+        <% if can? :crud, @idea %>
+            <div class="d-flex">
+                <div class="p-1">
+                    <%= button_to 'Edit', edit_idea_path(@idea), method: :get , class:"btn btn-primary"%>
+                </div>
+                <div class="p-1"> 
+                    <%= button_to 'Delete', idea_path(@idea), method: :delete, data: { confirm: "Are you sure?"}, class:"btn btn-primary" %>
+                </div>
+            </div>
+        <% end %>
+        <small>
+            <% if @like.present? %>
+                <div class="p-1">
+                    <%= button_to "Liked", like_path(@like), method: :delete , class:"btn btn-primary" %>
+                </div>
+            <% else %>
+                <div class="p-1">
+                    <%= button_to 'Like', idea_likes_path(@idea), method: :post , class:"btn btn-primary" %>
+                </div>
+            <% end %>
+        </small>
+    
+    </div>
+    <hr>
+    <div>
+        <ul>
+            <% @reviews.each do |review| %>
+                <div>
+                    <li>
+                        <div>
+                            <%= review.body%>
+                        </div>
+                        <div>
+                            <small>reviewed <%= time_ago_in_words(review.created_at) %> ago by <label>Created by: <%= review.user.full_name%> </label>
+                            </small>
+                        </div>
+                        <div>
+                            <% if can? :crud, review %>
+                                <%= button_to "Delete", idea_review_path(@idea.id, review.id), method: :delete %>
+                            <% end %>                        
+                        </div>
+                    </li>                
+                </div>
+                <br>
+            <% end %>
+        </ul>
+        <h4>Write your review</h4>
+
+        <% if @review.errors.any? %>
+            <ul>
+                <% @review.errors.full_messages.each do |msg| %>
+                    <li>
+                        <%= msg %>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
+        <%= form_with(model:[@idea, @review]) do |f|%>
+            <div>
+                <%= f.label :body%>
+                <br>
+                <%= f.text_area :body, cols:50, rows: 2 ,class:"form-control" %>
+            </div>
+            <br>
+            <%= f.submit "review" , class:"btn btn-primary" %>
+        <% end %>    
+    </div>
+    
+    
+
+
+
+
+</div>

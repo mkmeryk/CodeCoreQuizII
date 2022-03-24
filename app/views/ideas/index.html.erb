@@ -1,0 +1,32 @@
+<div style=" margin-top: 1%;margin-bottom: 1%;margin-left: 1%;margin-right: 1%;">
+    <h1 class="text-center">Ideas</h1>    
+    <%= @ideas.each do |idea| %>
+        <div class="card-body">
+
+            <div>
+                <h2><%= link_to idea.title, idea_path(idea)  %></h2>
+                <p> <%= idea.description %> </p>
+            </div>   
+            <br> 
+            <div class="d-flex justify-content-between">
+                <div>
+                    <p> <%= idea.user.full_name %> </p>   
+
+                </div>
+
+                <div>
+
+                    <p> Likes: <%= idea.likes.count %> </p>                  
+                </div>
+      
+            </div>
+
+        </div>
+    <hr>
+
+    <% end %>
+
+</div>
+
+
+
