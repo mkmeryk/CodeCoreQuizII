@@ -1,0 +1,50 @@
+<h1>Idea Show Page</h1>
+<h2><%= @idea.title %></h2>
+<p><%= @idea.description %></p>
+<p><small>Created at: <%= @idea.created_at %></small></p>
+<label>Created by: <%= @idea.user.full_name%> </label>
+
+<% if can? :crud, @idea %>
+    <%= button_to 'Edit', edit_idea_path(@idea), method: :get %>
+    <%= button_to 'Delete', idea_path(@idea), method: :delete, data: { confirm: "Are you sure?"} %>
+<% end %>
+
+<h4>Reviews</h4>
+
+<ul>
+    <% @reviews.each do |review| %>
+        <li>
+            <%= review.body%>
+            <small>reviewed <%= time_ago_in_words(review.created_at) %> ago by <label>Created by: <%= review.user.full_name%> </label>
+            </small>
+           
+            <% if can? :crud, review %>
+                <%= button_to "Delete", idea_review_path(@idea.id, review.id), method: :delete %>
+            <% end %>
+        </li>
+    <% end %>
+</ul>
+
+<hr>
+
+<h4>Write your review</h4>
+
+<% if @review.errors.any? %>
+    <ul>
+        <% @review.errors.full_messages.each do |msg| %>
+            <li>
+                <%= msg %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
+<%= form_with(model:[@idea, @review]) do |f|%>
+
+    <div>
+        <%= f.label :body%>
+        <br>
+        <%= f.text_area :body, cols:50, rows: 5  %>
+    </div>
+
+    <%= f.submit "review" %>
+<% end %>

@@ -11,6 +11,18 @@
   </head>
 
   <body>
+  <%= link_to 'Ideas', ideas_path %>
+  <%= link_to 'New Idea!', new_idea_path %>
+    <%if(user_signed_in?) %>
+      Hello <%= current_user.first_name%>, 
+      <%= button_to "Log out", sessions_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Sign In Page', new_session_path%>
+      <%= link_to 'Sign Up Page', new_user_path%>
+    <% end %>
+    <% flash.each do |type, message| %>
+      <%= type + "-------" + message %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
