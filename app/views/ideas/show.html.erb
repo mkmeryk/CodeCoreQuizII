@@ -3,11 +3,19 @@
 <p><%= @idea.description %></p>
 <p><small>Created at: <%= @idea.created_at %></small></p>
 <label>Created by: <%= @idea.user.full_name%> </label>
+<small>Liked by: <%= @idea.likes.count %> </small>
 
 <% if can? :crud, @idea %>
     <%= button_to 'Edit', edit_idea_path(@idea), method: :get %>
     <%= button_to 'Delete', idea_path(@idea), method: :delete, data: { confirm: "Are you sure?"} %>
 <% end %>
+<small>
+    <% if @like.present? %>
+        <%= button_to "Liked", like_path(@like), method: :delete %>
+    <% else %>
+        <%= button_to 'Like', idea_likes_path(@idea), method: :post %>
+    <% end %>
+</small>
 
 <h4>Reviews</h4>
 

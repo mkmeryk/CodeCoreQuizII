@@ -7,9 +7,12 @@ Rails.application.routes.draw do
   root "welcome#index"
   resources :ideas do
     resources :reviews, only:[:create, :destroy]
+    resources :likes, shallow: true, only: [:create, :destroy]
+    get :liked, on: :collection
   end
   resources :users
   resources :sessions, only:[:new, :destroy, :create]
+  
 
 
 end

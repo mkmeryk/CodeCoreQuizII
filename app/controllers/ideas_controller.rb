@@ -19,10 +19,11 @@ class IdeasController < ApplicationController
     end
 
     def show
-       
+        
         @idea = Idea.find params[:id]
         @review = Review.new
         @reviews = @idea.reviews
+        @like = @idea.likes.find_by(user: current_user)
         
     end
 
@@ -58,4 +59,8 @@ class IdeasController < ApplicationController
         end
 
     end    
+
+    def liked
+        @ideas = current_user.liked_ideas
+    end
 end
