@@ -12,11 +12,11 @@
 
   <body>
     <%if(user_signed_in?) %>
-      <div class="d-flex justify-content-between">
-        <div class="p-1">
+      <div class="d-flex justify-content-between bg-info p-2 text-dark bg-opacity-50">
+        <div class="p-1 align-self-center">
           <%= link_to 'Idea Factory', ideas_path %>
         </div> 
-        <div class="p-1 text-success align-self-center">
+        <div class="p-1 align-self-center">
           Hello <%= current_user.first_name%>!
         </div>
         <div class="p-1">
@@ -24,8 +24,8 @@
         </div>    
       </div>
     <% else %>
-      <div class="d-flex justify-content-between">
-        <div class="p-1">
+      <div class="d-flex justify-content-between bg-info p-3 text-dark bg-opacity-50">
+        <div class="p-1 align-self-center">
           <%= link_to 'Idea Factory', ideas_path %>
         </div>       
         <div class="d-flex justify-content-end">
@@ -38,27 +38,28 @@
         </div>
       </div>
     <% end %>
-    <% flash.each do |type, message| %>
-      <div class="d-flex justify-content-end" >
-        <%= type + "-------" + message %>
-      </div>
-      
-    <% end %>
-  <ul class="nav justify-content-center">
-  
-    <li class="nav-item">
-      <a class="nav-link" href="/">Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/ideas">Ideas</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/ideas/new">New Idea!</a>
-    </li>
-    
-    
-  </ul>
- 
+
+    <ul class="nav justify-content-center bg-info p-1 text-dark bg-opacity-25">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/ideas">Ideas</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="/ideas/new">New Idea!</a>
+      </li>
+    </ul>
+
+    <div class="d-flex justify-content-center bg-info p-1 text-dark bg-opacity-10 ">
+      <% flash.each do |type, message| %>
+        <div class="d-flex justify-content-end" >
+          <%= type + "-------" + message %>
+        </div>
+        
+      <% end %>  
+    </div>
+
     <%= yield %>
   </body>
 </html>
