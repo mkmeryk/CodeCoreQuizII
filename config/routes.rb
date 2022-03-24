@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     get :liked, on: :collection
   end
   resources :users
-  resources :sessions, only:[:new, :destroy, :create]
+  resources :sessions
+  delete "/sessions",to: "sessions#destroy", as: :session_delete
   
 
 

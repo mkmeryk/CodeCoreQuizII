@@ -11,18 +11,54 @@
   </head>
 
   <body>
-  <%= link_to 'Ideas', ideas_path %>
-  <%= link_to 'New Idea!', new_idea_path %>
     <%if(user_signed_in?) %>
-      Hello <%= current_user.first_name%>, 
-      <%= button_to "Log out", session_path, method: :delete %>
+      <div class="d-flex justify-content-between">
+        <div class="p-1">
+          <%= link_to 'Idea Factory', ideas_path %>
+        </div> 
+        <div class="p-1 text-success align-self-center">
+          Hello <%= current_user.first_name%>!
+        </div>
+        <div class="p-1">
+          <%= button_to "Log out", sessions_path, method: :delete, class:"btn btn-primary" %>
+        </div>    
+      </div>
     <% else %>
-      <%= link_to 'Sign In Page', new_session_path%>
-      <%= link_to 'Sign Up Page', new_user_path%>
+      <div class="d-flex justify-content-between">
+        <div class="p-1">
+          <%= link_to 'Idea Factory', ideas_path %>
+        </div>       
+        <div class="d-flex justify-content-end">
+          <div class="p-1">
+            <%= link_to 'Sign In Page', new_session_path%>
+          </div>
+          <div class="p-1">
+            <%= link_to 'Sign Up Page', new_user_path%>
+          </div>  
+        </div>
+      </div>
     <% end %>
     <% flash.each do |type, message| %>
-      <%= type + "-------" + message %>
+      <div class="d-flex justify-content-end" >
+        <%= type + "-------" + message %>
+      </div>
+      
     <% end %>
+  <ul class="nav justify-content-center">
+  
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/ideas">Ideas</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/ideas/new">New Idea!</a>
+    </li>
+    
+    
+  </ul>
+ 
     <%= yield %>
   </body>
 </html>

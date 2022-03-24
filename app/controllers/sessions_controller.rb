@@ -13,10 +13,15 @@ class SessionsController < ApplicationController
         end
     end
     
+
+
     def destroy
+        # session.delete :user_id
+        puts "hello world"
         session[:user_id] = nil
         flash.notice = "Logged out"
         redirect_to root_path
+        # p "hello"
     end
 
 end

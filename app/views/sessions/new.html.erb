@@ -1,13 +1,15 @@
-<h1>Sign In</h1>
+<div style=" margin-top: 1%;margin-bottom: 1%;margin-left: 1%;margin-right: 1%;"> 
+    <h1 class="text-center">Sign In</h1>
 
-<%= form_with url: sessions_path do |f| %>
-    <div>
-        <%= f.label :email%>
-        <%= f.email_field :email%> 
-    </div>
-    <div>
-        <%= f.label :password%>
-        <%= f.password_field :password%> 
-    </div>
-    <%= f.submit "Sign In" %>
-<% end %>
+    <%= form_with url: sessions_path do |f| %>
+        <div class="p-1">
+            <%= f.label :email%>
+            <%= f.email_field :email%> 
+        </div>
+        <div class="p-1">
+            <%= f.label :password%>
+            <%= f.password_field :password%> 
+        </div>
+        <%= f.submit "Sign In" %>
+    <% end %>
+</div>
